@@ -46,9 +46,13 @@ public class Adjacencia {
 		this.adjCode = adjCode;
 	}
 
-	public boolean verificaAdj(Cidade c1, Cidade c2) {
-			return (c1.getCode() + c2.getCode() == this.getAdjCode());		 
+	public boolean verificaAdj(Cidade cid) {
+		return (cid.getCode() == this.cid1.getCode() || cid.getCode() == this.cid2.getCode());		 
 	}
 	
+	/*public Cidade proximaAjd() {
+		return Cidade;
+	}
+	*/
 	
 }

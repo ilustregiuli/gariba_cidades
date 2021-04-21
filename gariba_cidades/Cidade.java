@@ -4,15 +4,16 @@ public class Cidade {
 	
 	private String name;
 	private int code;
-	private int [] codeCidAdjac;
+	private Adjacencia [] adjac;
 	
 
-	public Cidade(String name, int code,int qtdCids) {
+	public Cidade(String name,int qtdCids) {
 		this.name = name;
-		this.code = code;
-		this.codeCidAdjac = new int[qtdCids];
+		this.adjac = new Adjacencia[qtdCids];
+		criaCodCid(this.name);
 	}
 
+	
 	public String getName() {
 		return name;
 	}
@@ -29,43 +30,33 @@ public class Cidade {
 		this.code = code;
 	}
 	
-	public String getCidAdjac() {
-		String adj = "";
-		for(int x = 0; x < codeCidAdjac.length; x++) {
-			adj += " " + codeCidAdjac[x];
-		}
-		return adj;
+	public Adjacencia[] getAdjac() {
+		return adjac;
 	}
 	
-
-	public int[] getCodeCidAdjac() {
-		return codeCidAdjac;
+	public Adjacencia getAdjacPos(int pos) {
+		return this.adjac[pos];
+		
 	}
 
-	public void setCodeCidAdjac(int[] codeCidAdjac) {
-		this.codeCidAdjac = codeCidAdjac;
-	}
-
-	public void setCodeCidAdjac(int code, int index) {
-		this.codeCidAdjac[index] = code;
-	}
-
-	public boolean verificaAdjacencia(int codCid) {
-		boolean result = false;
-		for(int x = 0; x < codeCidAdjac.length; x++) {
-			if(codCid == codeCidAdjac[x]) {
-				result = true;
+	public void addCidAdjac(Adjacencia cidAdjac) {
+		for(int i = 0; i < adjac.length; i++) {
+			if(adjac[i] == null) {
+				this.adjac[i] = cidAdjac;
+				break;
 			}
 		}
-		return result;
+		
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + code;
-		return result;
+	private void criaCodCid(String name) {
+		char [] numChar = new char[this.name.length()];
+		for(int i = 0; i < this.name.length(); i++) {
+			numChar[i] = this.name.charAt(i);
+		}
+		for(int i = 0; i < numChar.length; i++) {
+			this.code += numChar[i];
+		}
 	}
 
 	@Override
